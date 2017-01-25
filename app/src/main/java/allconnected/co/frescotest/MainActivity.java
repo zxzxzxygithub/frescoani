@@ -3,7 +3,6 @@ package allconnected.co.frescotest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -29,20 +28,21 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /**
+                 * showani
+                 */
+                DraweeController draweeController = Fresco.newDraweeControllerBuilder()
+                        .setAutoPlayAnimations(true)//自动播放动画
+                        .setUri(Uri.parse("asset:///a.gif"))//路径
+                        .build();
+                dvWelcome.setController(draweeController);
             }
         });
 
         dvWelcome= (SimpleDraweeView) findViewById(R.id.dv_welcome);
-        /**
-         * 下面是主要代码：
-         */
-        DraweeController draweeController = Fresco.newDraweeControllerBuilder()
-                .setAutoPlayAnimations(true)//自动播放动画
-                .setUri(Uri.parse("asset:///a.gif"))//路径
-                .build();
-        dvWelcome.setController(draweeController);
+
+        FrescoUtil.loadResPic(this,dvWelcome,R.drawable.webp1);
+
     }
 
     @Override
